@@ -13,21 +13,30 @@
             <h1 class="text-3xl font-bold text-orange-900 mb-6">PIC Financial Dashboard - 2025 YTD</h1>
             
             <!-- YTD Summary -->
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
                 <div class="bg-orange-100 p-4 rounded-lg">
                     <h3 class="font-semibold">YTD Revenue</h3>
                     <p class="text-lg">$151,423</p>
                     <p class="text-sm text-orange-700">87.81% of budget</p>
+                    <p class="text-sm text-green-600">+5.11% vs 2024</p>
+                </div>
+                <div class="bg-orange-100 p-4 rounded-lg">
+                    <h3 class="font-semibold">YTD Expenses</h3>
+                    <p class="text-lg">$207,700</p>
+                    <p class="text-sm text-orange-700">96.34% of budget</p>
+                    <p class="text-sm text-green-600">-18.49% vs 2024</p>
                 </div>
                 <div class="bg-orange-100 p-4 rounded-lg">
                     <h3 class="font-semibold">YTD Net Income</h3>
                     <p class="text-lg">-$55,952</p>
                     <p class="text-sm text-orange-700">vs budget -$43,149</p>
+                    <p class="text-sm text-green-600">+49.48% improvement</p>
                 </div>
                 <div class="bg-orange-100 p-4 rounded-lg">
-                    <h3 class="font-semibold">YoY Performance</h3>
-                    <p class="text-lg">+49.48%</p>
-                    <p class="text-sm text-orange-700">Net income improvement</p>
+                    <h3 class="font-semibold">Expense Categories</h3>
+                    <p class="text-sm">Labor: $165,288</p>
+                    <p class="text-sm">Operating: $42,412</p>
+                    <p class="text-sm text-orange-700">Labor 79.6% of expenses</p>
                 </div>
             </div>
 
@@ -41,8 +50,8 @@
                             <h3 class="font-semibold text-lg mb-2">January 2025</h3>
                             <ul class="text-sm space-y-1">
                                 <li>Revenue: $151,423</li>
-                                <li>Net Income: -$55,952</li>
-                                <li>YoY Growth: +5.11%</li>
+                                <li>Expenses: $207,700</li>
+                                <li>YoY Expense: -18.49%</li>
                             </ul>
                         </div>
                     </a>
@@ -76,19 +85,19 @@
                 <h2 class="text-2xl font-bold text-orange-900 mb-4">Critical Focus Areas</h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
-                        <h3 class="font-semibold mb-2">Financial Priorities</h3>
+                        <h3 class="font-semibold mb-2">Financial Achievements</h3>
                         <ul class="list-disc pl-5 space-y-2">
-                            <li>Revenue gap of $21,022 below budget</li>
-                            <li>QB Loan interest exceeding budget (157.81%)</li>
-                            <li>Payment processing fees at 194.95% of budget</li>
+                            <li>Significant expense reduction: -18.49% YoY</li>
+                            <li>Revenue growth: +5.11% YoY</li>
+                            <li>Net income improvement: +49.48% YoY</li>
                         </ul>
                     </div>
                     <div>
-                        <h3 class="font-semibold mb-2">Operational Improvements</h3>
+                        <h3 class="font-semibold mb-2">Areas Needing Attention</h3>
                         <ul class="list-disc pl-5 space-y-2">
-                            <li>18.49% reduction in total expenses YoY</li>
-                            <li>Optimization of contractor allocation needed</li>
-                            <li>Healthcare costs up 29.73% YoY</li>
+                            <li>QB Loan interest: 157.81% of budget</li>
+                            <li>Payment fees: 194.95% of budget</li>
+                            <li>Healthcare costs: +29.73% YoY</li>
                         </ul>
                     </div>
                 </div>
@@ -103,14 +112,14 @@
             new Chart(ctx, {
                 type: 'bar',
                 data: {
-                    labels: ['Revenue', 'Net Income', 'Labor Costs', 'Operating Expenses'],
+                    labels: ['Revenue', 'Expenses', 'Net Income'],
                     datasets: [{
-                        label: 'Actual',
-                        data: [151423, -55952, 165288, 207700],
+                        label: '2025 YTD',
+                        data: [151423, 207700, -55952],
                         backgroundColor: '#8B4513'
                     }, {
-                        label: 'Budget',
-                        data: [172445, -43149, 150910, 215594],
+                        label: '2024 YTD',
+                        data: [144066, 254815, -110749],
                         backgroundColor: '#FF6B6B'
                     }]
                 },
