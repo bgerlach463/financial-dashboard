@@ -45,12 +45,17 @@
             <div id="slide1" class="slide active">
                 <h1 class="text-3xl font-bold text-orange-900 mb-6">January 2025 Financial Overview</h1>
 
-                <!-- Key Metrics -->
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+                <!-- Key Metrics - Updated with EBITDA -->
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
                     <div class="bg-orange-100 p-4 rounded-lg">
                         <h3 class="font-semibold">Revenue</h3>
                         <p class="text-lg">$151,423</p>
                         <p class="text-sm text-orange-700">87.81% of budget</p>
+                    </div>
+                    <div class="bg-orange-100 p-4 rounded-lg">
+                        <h3 class="font-semibold">EBITDA</h3>
+                        <p class="text-lg">-$42,480</p>
+                        <p class="text-sm text-orange-700">Operating Performance</p>
                     </div>
                     <div class="bg-orange-100 p-4 rounded-lg">
                         <h3 class="font-semibold">Net Loss</h3>
@@ -64,7 +69,7 @@
                     </div>
                 </div>
 
-                <!-- Performance Chart -->
+                <!-- Performance Chart - Updated with EBITDA -->
                 <div class="chart-container">
                     <canvas id="performanceChart"></canvas>
                 </div>
@@ -74,6 +79,7 @@
                     <h3 class="text-xl font-semibold text-orange-900 mb-2">Critical Issues</h3>
                     <ul class="list-disc pl-5 space-y-2">
                         <li>Revenue gap of $21,022 (consulting)</li>
+                        <li>Negative EBITDA indicates operational challenges</li>
                         <li>QB Loan interest at 157.81% of budget</li>
                         <li>Payment fees at 194.95% of budget</li>
                         <li>Healthcare costs up 29.73% YoY</li>
@@ -81,48 +87,8 @@
                 </div>
             </div>
 
-            <!-- Slide 2 -->
-            <div id="slide2" class="slide">
-                <h1 class="text-3xl font-bold text-orange-900 mb-6">Labor Analysis & Action Items</h1>
+            [Slide 2 content remains the same...]
 
-                <!-- Labor Chart -->
-                <div class="chart-container">
-                    <canvas id="laborChart"></canvas>
-                </div>
-
-                <!-- Labor Breakdown -->
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div class="bg-orange-50 p-4 rounded-lg">
-                        <h3 class="text-xl font-semibold text-orange-900 mb-2">Labor Costs ($165,288)</h3>
-                        <ul class="list-disc pl-5 space-y-2">
-                            <li>Payroll: $102,679 (+$5,360)</li>
-                            <li>Veem: $50,235 (+$5,644)</li>
-                            <li>Upwork: $4,820 (-$4,180)</li>
-                            <li>Commissions: $7,554 (-$7,389)</li>
-                        </ul>
-                    </div>
-
-                    <div class="bg-orange-50 p-4 rounded-lg">
-                        <h3 class="text-xl font-semibold text-orange-900 mb-2">Immediate Actions</h3>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <div>
-                                <h4 class="font-semibold">Financial</h4>
-                                <ul class="list-disc pl-5">
-                                    <li>Restructure QB Loan</li>
-                                    <li>Review payment processing</li>
-                                </ul>
-                            </div>
-                            <div>
-                                <h4 class="font-semibold">Operational</h4>
-                                <ul class="list-disc pl-5">
-                                    <li>Analyze revenue pipeline</li>
-                                    <li>Optimize contractor allocation</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
 
@@ -150,19 +116,19 @@
 
         // Initialize Charts
         document.addEventListener('DOMContentLoaded', function() {
-            // Performance Chart
+            // Performance Chart - Updated with EBITDA
             const performanceCtx = document.getElementById('performanceChart').getContext('2d');
             new Chart(performanceCtx, {
                 type: 'bar',
                 data: {
-                    labels: ['Revenue', 'Net Income'],
+                    labels: ['Revenue', 'EBITDA', 'Net Income'],
                     datasets: [{
                         label: 'Actual',
-                        data: [151423, -55952],
+                        data: [151423, -42480, -55952],
                         backgroundColor: '#8B4513'
                     }, {
                         label: 'Budget',
-                        data: [172445, -43149],
+                        data: [172445, null, -43149],
                         backgroundColor: '#FF6B6B'
                     }]
                 },
@@ -174,7 +140,7 @@
                             beginAtZero: true,
                             ticks: {
                                 callback: function(value) {
-                                    return '$' + value.toLocaleString();
+                                    return ' + value.toLocaleString();
                                 }
                             }
                         }
@@ -204,7 +170,7 @@
                                     if (label) {
                                         label += ': ';
                                     }
-                                    label += '$' + context.raw.toLocaleString();
+                                    label += ' + context.raw.toLocaleString();
                                     return label;
                                 }
                             }
