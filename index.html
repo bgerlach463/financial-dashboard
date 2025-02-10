@@ -4,35 +4,35 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PIC Financial Dashboard - 2025 YTD</title>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
 <body class="bg-gray-100">
     <div class="bg-white p-8">
         <div class="max-w-7xl mx-auto">
             <h1 class="text-3xl font-bold text-gray-800 mb-8">PIC Financial Dashboard - 2025 YTD</h1>
-            
+
             <!-- Key Metrics -->
             <div class="grid grid-cols-1 md:grid-cols-6 gap-4 mb-8">
                 <!-- Revenue -->
-                <div class="bg-white p-4 rounded-lg shadow border-l-4 border-[#8B4513]">
+                <div class="bg-white p-4 rounded-lg shadow border-l-4 border-orange-900">
                     <h3 class="font-semibold text-gray-800">YTD Revenue</h3>
                     <p class="text-2xl text-gray-800">$151,423</p>
                     <p class="text-sm text-gray-600">87.81% of budget</p>
                 </div>
-                <div class="bg-white p-4 rounded-lg shadow border-l-4 border-[#8B4513]">
+                <div class="bg-white p-4 rounded-lg shadow border-l-4 border-orange-900">
                     <h3 class="font-semibold text-gray-800">YoY Revenue Performance</h3>
                     <p class="text-2xl text-gray-800">+5.11%</p>
                     <p class="text-sm text-green-600">+$5,058 vs 2024</p>
                 </div>
 
                 <!-- Expenses -->
-                <div class="bg-white p-4 rounded-lg shadow border-l-4 border-[#FF8B8B]">
+                <div class="bg-white p-4 rounded-lg shadow border-l-4 border-red-300">
                     <h3 class="font-semibold text-gray-800">YTD Expenses</h3>
                     <p class="text-2xl text-gray-800">$207,700</p>
                     <p class="text-sm text-gray-600">96.34% of budget</p>
                 </div>
-                <div class="bg-white p-4 rounded-lg shadow border-l-4 border-[#FF8B8B]">
+                <div class="bg-white p-4 rounded-lg shadow border-l-4 border-red-300">
                     <h3 class="font-semibold text-gray-800">YoY Expense Performance</h3>
                     <p class="text-2xl text-gray-800">-18.49%</p>
                     <p class="text-sm text-green-600">$47,114 reduction</p>
@@ -66,7 +66,7 @@
                             </ul>
                         </div>
                     </a>
-                    
+
                     <!-- Future Months (Disabled) -->
                     <div class="bg-gray-50 p-4 rounded-lg opacity-50">
                         <h3 class="font-semibold text-lg mb-2">February 2025</h3>
@@ -90,52 +90,85 @@
                     <canvas id="ytdChart"></canvas>
                 </div>
             </div>
-<!-- Expense Categories -->
-<div class="mb-8">
-    <h2 class="text-2xl font-bold text-gray-800 mb-4">Expense Categories</h2>
-    <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
-        <div class="bg-white p-4 rounded-lg shadow">
-            <h3 class="font-semibold text-lg mb-2">Labor Costs</h3>
-            <p class="text-xl mb-1">$165,288</p>
-            <p class="text-sm text-gray-600 mb-2">79.6% of total expenses</p>
-            <ul class="text-sm space-y-1">
-                <li>Payroll: $102,679</li>
-                <li>Veem: $50,235</li>
-                <li>Upwork: $4,819</li>
-                <li>Commissions: $7,554</li>
-            </ul>
-        </div>
-        <div class="bg-white p-4 rounded-lg shadow">
-            <h3 class="font-semibold text-lg mb-2">Technology</h3>
-            <p class="text-xl mb-1">$20,267</p>
-            <p class="text-sm text-gray-600 mb-2">9.8% of total expenses</p>
-            <ul class="text-sm space-y-1">
-                <li>Software: $16,218</li>
-                <li>Internet/Phone: $4,049</li>
-            </ul>
-        </div>
-        <div class="bg-white p-4 rounded-lg shadow">
-            <h3 class="font-semibold text-lg mb-2">Professional Services</h3>
-            <p class="text-xl mb-1">$3,633</p>
-            <p class="text-sm text-gray-600 mb-2">1.7% of total expenses</p>
-            <ul class="text-sm space-y-1">
-                <li>Legal: $283</li>
-                <li>IT Services: $3,350</li>
-                <li>Accounting: $0</li>
-            </ul>
-        </div>
-        <div class="bg-white p-4 rounded-lg shadow">
-            <h3 class="font-semibold text-lg mb-2">Financial</h3>
-            <p class="text-xl mb-1">$9,260</p>
-            <p class="text-sm text-gray-600 mb-2">4.5% of total expenses</p>
-            <ul class="text-sm space-y-1">
-                <li>Interest: $4,103</li>
-                <li>QB Fees: $4,874</li>
-                <li>Bank Fees: $43</li>
-            </ul>
-        </div>
-    </div>
-</div>
+
+            <!-- Expense Categories -->
+            <div class="mb-8">
+                <h2 class="text-2xl font-bold text-gray-800 mb-4">Expense Categories</h2>
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                    <div class="bg-white p-4 rounded-lg shadow">
+                        <h3 class="font-semibold text-lg mb-2">Labor Costs</h3>
+                        <p class="text-xl mb-1">$165,288</p>
+                        <p class="text-sm text-gray-600 mb-2">79.6% of total expenses</p>
+                        <ul class="text-sm space-y-1">
+                            <li>Payroll: $102,679</li>
+                            <li>Veem: $50,235</li>
+                            <li>Upwork: $4,819</li>
+                            <li>Commissions: $7,554</li>
+                        </ul>
+                    </div>
+                    <div class="bg-white p-4 rounded-lg shadow">
+                        <h3 class="font-semibold text-lg mb-2">Technology</h3>
+                        <p class="text-xl mb-1">$20,267</p>
+                        <p class="text-sm text-gray-600 mb-2">9.8% of total expenses</p>
+                        <ul class="text-sm space-y-1">
+                            <li>Software: $16,218</li>
+                            <li>Internet/Phone: $4,049</li>
+                        </ul>
+                    </div>
+                    <div class="bg-white p-4 rounded-lg shadow">
+                        <h3 class="font-semibold text-lg mb-2">Professional Services</h3>
+                        <p class="text-xl mb-1">$3,633</p>
+                        <p class="text-sm text-gray-600 mb-2">1.7% of total expenses</p>
+                        <ul class="text-sm space-y-1">
+                            <li>Legal: $283</li>
+                            <li>IT Services: $3,350</li>
+                            <li>Accounting: $0</li>
+                        </ul>
+                    </div>
+                    <div class="bg-white p-4 rounded-lg shadow">
+                        <h3 class="font-semibold text-lg mb-2">Financial</h3>
+                        <p class="text-xl mb-1">$9,260</p>
+                        <p class="text-sm text-gray-600 mb-2">4.5% of total expenses</p>
+                        <ul class="text-sm space-y-1">
+                            <li>Interest: $4,103</li>
+                            <li>QB Fees: $4,874</li>
+                            <li>Bank Fees: $43</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Expense Categories YoY Charts -->
+            <div class="mb-8">
+                <h2 class="text-2xl font-bold text-gray-800 mb-4">Expense Categories Year over Year</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="bg-white p-6 rounded-lg shadow">
+                        <h3 class="text-xl font-bold mb-4">Labor Costs YoY</h3>
+                        <div class="h-64">
+                            <canvas id="laborChart"></canvas>
+                        </div>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow">
+                        <h3 class="text-xl font-bold mb-4">Technology YoY</h3>
+                        <div class="h-64">
+                            <canvas id="technologyChart"></canvas>
+                        </div>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow">
+                        <h3 class="text-xl font-bold mb-4">Professional Services YoY</h3>
+                        <div class="h-64">
+                            <canvas id="professionalChart"></canvas>
+                        </div>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow">
+                        <h3 class="text-xl font-bold mb-4">Financial YoY</h3>
+                        <div class="h-64">
+                            <canvas id="financialChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <!-- Critical Focus Areas -->
             <div class="bg-orange-50 p-4 rounded-lg">
                 <h2 class="text-2xl font-bold text-orange-900 mb-4">Critical Focus Areas</h2>
@@ -164,18 +197,19 @@
     <script>
         // Initialize YTD Chart
         document.addEventListener('DOMContentLoaded', function() {
-            const ctx = document.getElementById('ytdChart').getContext('2d');
-            new Chart(ctx, {
+            // YTD Performance Chart
+            const ytdCtx = document.getElementById('ytdChart').getContext('2d');
+            new Chart(ytdCtx, {
                 type: 'bar',
                 data: {
-                    labels: ['Revenue', 'Net Income', 'Labor Costs', 'Operating Expenses'],
+                    labels: ['Revenue', 'Net Income'],
                     datasets: [{
                         label: 'Actual',
-                        data: [151423, -55952, 165288, 42412],
+                        data: [151423, -55952],
                         backgroundColor: '#8B4513'
                     }, {
                         label: 'Budget',
-                        data: [172445, -43149, 150910, 64684],
+                        data: [172445, -43149],
                         backgroundColor: '#FF6B6B'
                     }]
                 },
@@ -202,6 +236,80 @@
                         }
                     }
                 }
+            });
+
+            // Expense Category YoY Charts
+            const chartConfigs = [
+                {
+                    id: 'laborChart',
+                    data: {
+                        labels: ['Labor Costs'],
+                        values: [165288, 214072]
+                    }
+                },
+                {
+                    id: 'technologyChart',
+                    data: {
+                        labels: ['Technology'],
+                        values: [20267, 21654]
+                    }
+                },
+                {
+                    id: 'professionalChart',
+                    data: {
+                        labels: ['Professional Services'],
+                        values: [3633, 3752]
+                    }
+                },
+                {
+                    id: 'financialChart',
+                    data: {
+                        labels: ['Financial'],
+                        values: [9260, 5560]
+                    }
+                }
+            ];
+
+            chartConfigs.forEach(config => {
+                const ctx = document.getElementById(config.id).getContext('2d');
+                new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: config.data.labels,
+                        datasets: [{
+                            label: '2025',
+                            data: [config.data.values[0]],
+                            backgroundColor: '#8B4513'
+                        }, {
+                            label: '2024',
+                            data: [config.data.values[1]],
+                            backgroundColor: '#FF6B6B'
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                ticks: {
+                                    callback: function(value) {
+                                        return ' + (value / 1000).toFixed(0) + 'k';
+                                    }
+                                }
+                            }
+                        },
+                        plugins: {
+                            tooltip: {
+                                callbacks: {
+                                    label: function(context) {
+                                        return context.dataset.label + ':  + context.raw.toLocaleString();
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
             });
         });
     </script>
