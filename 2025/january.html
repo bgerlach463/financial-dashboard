@@ -1,1 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PIC Financial Dashboard - January 2025</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        .slide {
+            display: none;
+        }
+        .slide.active {
+            display: block;
+        }
+        .chart-container {
+            height: 400px;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body class="bg-orange-100 p-8">
+    <div class="max-w-7xl mx-auto">
+        <div class="bg-white rounded-lg shadow-lg p-6 mb-4">
+            <!-- Slide Navigation -->
+            <div class="flex justify-between items-center mb-6">
+                <div class="text-sm text-orange-700">
+                    Slide <span id="currentSlide">1</span> of 2
+                </div>
+                <div>
+                    <button onclick="previousSlide()" class="px-4 py-2 bg-orange-100 rounded-lg mr-2 hover:bg-orange-200">Previous</button>
+                    <button onclick="nextSlide()" class="px-4 py-2 bg-orange-100 rounded-lg hover:bg-orange-200">Next</button>
+                </div>
+            </div>
+
+            <!-- Slide 1 -->
+            <div id="slide1" class="slide active">
+                <h1 class="text-3xl font-bold text-orange-900 mb-6">January 2025 Financial Overview</h1>
+
+                <!-- Key Metrics -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+                    <div class="bg-orange-100 p-4 rounded-lg">
+                        <h3 class="font-semibold">Revenue</h3>
+                        <p class="text-lg">$151,423</p>
+                        <p class="text-sm text-orange-700">87.81% of budget</p>
+                    </div>
+                    <div class="bg-orange-100 p-4 rounded-lg">
+                        <h3 class="font-semibold">Net Loss</h3>
+                        <p class="text-lg">$55,952</p>
+                        <p class="text-sm text-orange-700">vs budget $43,149</p>
+                    </div>
+                    <div class="bg-orange-100 p-4 rounded-lg">
+                        <h3 class="font-semibold">YoY Improvement</h3>
+                        <p class="text-lg">49.48%</p>
+                        <p class="text-sm text-orange-700">vs Jan 2024</p>
+                    </div>
+                </div>
+
+                <!-- Performance Chart -->
+                <div class="chart-container">
+                    <canvas id="performanceChart"></canvas>
+                </div>
+
+                <!-- Critical Issues -->
+                <div class="bg-orange-50 p-4 rounded-lg">
+                    <h3 class="text-xl font-semibold text-orange-900 mb-2">Critical Issues</h3>
+                    <ul class="list-disc pl-5 space-y-2">
+                        <li>Revenue gap of $21,022 (consulting)</li>
+                        <li>QB Loan interest at 157.81% of budget</li>
+                        <li>Payment fees at 194.95% of budget</li>
+                        <li>Healthcare costs up 29.73% YoY</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Slide 2 -->
+            <div id="slide2" class="slide">
+                <h1 class="text-3xl font-bold text-orange-900 mb-6">Labor Analysis & Action Items</h1>
+
+                <!-- Labor Chart -->
+                <div class="chart-container">
+                    <canvas id="laborChart"></canvas>
+                </div>
+
+                <!-- Labor Breakdown -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="bg-orange-50 p-4 rounded-lg">
+                        <h3 class="text-xl font-semibold text-orange-900 mb-2">Labor Costs ($165,288)</h3>
+                        <ul class="list-disc pl-5 space-y-2">
+                            <li>Payroll: $102,679 (+$5,360)</li>
+                            <li>Veem: $50,235 (+$5,644)</li>
+                            <li>Upwork: $4,820 (-$4,180)</li>
+                            <li>Commissions: $7,554 (-$7,389)</li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-orange-50 p-4 rounded-lg">
+                        <h3 class="text-xl font-semibold text-orange-900 mb-2">Immediate Actions</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <h4 class="font-semibold">Financial</h4>
+                                <ul class="list-disc pl-5">
+                                    <li>Restructure QB Loan</li>
+                                    <li>Review payment processing</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold">Operational</h4>
+                                <ul class="list-disc pl-5">
+                                    <li>Analyze revenue pipeline</li>
+                                    <li>Optimize contractor allocation</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Slide Navigation
+        let currentSlideIndex = 1;
+
+        function showSlide(n) {
+            const slides = document.querySelectorAll('.slide');
+            const currentSlideDisplay = document.getElementById('currentSlide');
+
+            slides.forEach(slide => slide.classList.remove('active'));
+            currentSlideIndex = n;
+            slides[n-1].classList.add('active');
+            currentSlideDisplay.textContent = n;
+        }
+
+        function nextSlide() {
+            if (currentSlideIndex < 2) showSlide(currentSlideIndex + 1);
+        }
+
+        function previousSlide() {
+            if (currentSlideIndex > 1) showSlide(currentSlideIndex - 1);
+        }
+
+        // Initialize Charts
+        document.addEventListener('DOMContentLoaded', function() {
+            // Performance Chart
+            const performanceCtx = document.getElementById('performanceChart').getContext('2d');
+            new Chart(performanceCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['Revenue', 'Net Income'],
+                    datasets: [{
+                        label: 'Actual',
+                        data: [151423, -55952],
+                        backgroundColor: '#8B4513'
+                    }, {
+                        label: 'Budget',
+                        data: [172445, -43149],
+                        backgroundColor: '#FF6B6B'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                callback: function(value) {
+                                    return '$' + value.toLocaleString();
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Labor Chart
+            const laborCtx = document.getElementById('laborChart').getContext('2d');
+            new Chart(laborCtx, {
+                type: 'pie',
+                data: {
+                    labels: ['Payroll', 'Veem', 'Upwork', 'Commissions'],
+                    datasets: [{
+                        data: [102679, 50235, 4820, 7554],
+                        backgroundColor: ['#8B4513', '#FF6B6B', '#FFA07A', '#FFD700']
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    let label = context.label || '';
+                                    if (label) {
+                                        label += ': ';
+                                    }
+                                    label += '$' + context.raw.toLocaleString();
+                                    return label;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
 
