@@ -211,124 +211,142 @@
     </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Utility function for currency formatting
-            function formatCurrency(value) {
-                return new Intl.NumberFormat('en-US', {
-                    style: 'currency',
-                    currency: 'USD',
-                    minimumFractionDigits: 0,
-                    maximumFractionDigits: 0,
-                }).format(value);
+        // Wait for DOM and Chart.js to load
+        window.addEventListener('load', function() {
+            if (typeof Chart === 'undefined') {
+                console.error('Chart.js not loaded');
+                return;
             }
 
-            // YTD Performance Chart
-            const ytdCtx = document.getElementById('ytdChart').getContext('2d');
-            new Chart(ytdCtx, {
-                type: 'bar',
-                data: {
-                    labels: ['Revenue', 'Net Income'],
-                    datasets: [{
-                        label: 'Actual',
-                        data: [151423, -55952],
-                        backgroundColor: '#8B4513'
-                    }, {
-                        label: 'Budget',
-                        data: [172445, -43149],
-                        backgroundColor: '#FF6B6B'
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        title: {
-                            display: true,
-                            text: 'YTD Performance vs Budget'
-                        }
-                    },
-                    scales: {
-                        y: {
-                            beginAtZero: true,
-                            ticks: {
-                                callback: function(value) {
-                                    return formatCurrency(value);
-                                }
-                            }
-                        }
-                    }
+            try {
+                // Utility function for currency formatting
+                function formatCurrency(value) {
+                    return new Intl.NumberFormat('en-US', {
+                        style: 'currency',
+                        currency: 'USD',
+                        minimumFractionDigits: 0,
+                        maximumFractionDigits: 0,
+                    }).format(value);
                 }
-            });
 
-            // Category data
-            const categories = [
-                {
-                    id: 'laborChart',
-                    title: 'Labor Costs',
-                    data2025: 165288,
-                    data2024: 214072
-                },
-                {
-                    id: 'technologyChart',
-                    title: 'Technology',
-                    data2025: 20267,
-                    data2024: 21654
-                },
-                    id: 'professionalChart',
-                    title: 'Professional Services',
-                    data2025: 3633,
-                    data2024: 3752
-                },
-                {
-                    id: 'financialChart',
-                    title: 'Financial',
-                    data2025: 9260,
-                    data2024: 5560
-                }
-            ];
-
-            // Create Category Charts
-            categories.forEach(category => {
-                const ctx = document.getElementById(category.id).getContext('2d');
-                new Chart(ctx, {
-                    type: 'bar',
-                    data: {
-                        labels: [category.title],
-                        datasets: [{
-                            label: '2025',
-                            data: [category.data2025],
-                            backgroundColor: '#8B4513'
-                        }, {
-                            label: '2024',
-                            data: [category.data2024],
-                            backgroundColor: '#FF6B6B'
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        scales: {
-                            y: {
-                                beginAtZero: true,
-                                ticks: {
-                                    callback: function(value) {
-                                        return formatCurrency(value);
-                                    }
-                                }
-                            }
+                // YTD Performance Chart
+                const ytdCtx = document.getElementById('ytdChart');
+                if (ytdCtx) {
+                    new Chart(ytdCtx, {
+                        type: 'bar',
+                        data: {
+                            labels: ['Revenue', 'EBITDA', 'Net Income'],
+                            datasets: [{
+                                label: 'Actual',
+                                data: [151423, -42480, -55952],
+                                backgroundColor: '#8B4513'
+                            }, {
+                                label: 'Budget',
+                                data: [172445, -33149, -43149],
+                                backgroundColor: '#FF6B6B'
+                            }]
                         },
-                        plugins: {
-                            tooltip: {
-                                callbacks: {
-                                    label: function(context) {
-                                        return context.dataset.label + ': ' + formatCurrency(context.raw);
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            plugins: {
+                                tooltip: {
+                                    callbacks: {
+                                        label: function(context) {
+                                            return context.dataset.label + ': ' + formatCurrency(context.raw);
+                                        }
+                                    }
+                                }
+                            },
+                            scales: {
+                                y: {
+                                    beginAtZero: true,
+                                    ticks: {
+                                        callback: function(value) {
+                                            return formatCurrency(value);
+                                        }
                                     }
                                 }
                             }
                         }
+                    });
+                }
+
+                // Category data definition
+                const categories = [
+                    {
+                        id: 'laborChart',
+                        title: 'Labor Costs',
+                        data2025: 165288,
+                        data2024: 214072
+                    },
+                    {
+                        id: 'technologyChart',
+                        title: 'Technology',
+                        data2025: 20267,
+                        data2024: 21654
+                    },
+                    {
+                        id: 'professionalChart',
+                        title: 'Professional Services',
+                        data2025: 3633,
+                        data2024: 3752
+                    },
+                    {
+                        id: 'financialChart',
+                        title: 'Financial',
+                        data2025: 9260,
+                        data2024: 5560
+                    }
+                ];
+
+                // Create Category Charts
+                categories.forEach(category => {
+                    const ctx = document.getElementById(category.id);
+                    if (ctx) {
+                        new Chart(ctx, {
+                            type: 'bar',
+                            data: {
+                                labels: [category.title],
+                                datasets: [{
+                                    label: '2025',
+                                    data: [category.data2025],
+                                    backgroundColor: '#8B4513'
+                                }, {
+                                    label: '2024',
+                                    data: [category.data2024],
+                                    backgroundColor: '#FF6B6B'
+                                }]
+                            },
+                            options: {
+                                responsive: true,
+                                maintainAspectRatio: false,
+                                scales: {
+                                    y: {
+                                        beginAtZero: true,
+                                        ticks: {
+                                            callback: function(value) {
+                                                return formatCurrency(value);
+                                            }
+                                        }
+                                    }
+                                },
+                                plugins: {
+                                    tooltip: {
+                                        callbacks: {
+                                            label: function(context) {
+                                                return context.dataset.label + ': ' + formatCurrency(context.raw);
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        });
                     }
                 });
-            });
+            } catch (error) {
+                console.error('Error initializing charts:', error);
+            }
         });
     </script>
 </body>
