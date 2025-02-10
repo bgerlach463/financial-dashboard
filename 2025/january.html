@@ -143,7 +143,7 @@
     </div>
 
     <script>
-        // Slide Navigation
+        // Slide Navigation logic remains the same
         let currentSlideIndex = 1;
 
         function showSlide(n) {
@@ -166,7 +166,7 @@
 
         // Initialize Charts
         document.addEventListener('DOMContentLoaded', function() {
-            // YoY Performance Chart
+            // YoY Performance Chart remains the same
             const yoyCtx = document.getElementById('yoyPerformanceChart').getContext('2d');
             new Chart(yoyCtx, {
                 type: 'bar',
@@ -204,19 +204,19 @@
                 }
             });
 
-            // Current Performance Chart
+            // Updated Current Performance Chart without EBITDA
             const perfCtx = document.getElementById('currentPerformanceChart').getContext('2d');
             new Chart(perfCtx, {
                 type: 'bar',
                 data: {
-                    labels: ['Revenue', 'EBITDA', 'Net Income'],
+                    labels: ['Revenue', 'Net Income'],
                     datasets: [{
                         label: 'Actual',
-                        data: [151423, -42480, -55952],
+                        data: [151423, -55952],
                         backgroundColor: '#8B4513'
                     }, {
                         label: 'Budget',
-                        data: [172445, null, -43149],
+                        data: [172445, -43149],
                         backgroundColor: '#FF6B6B'
                     }]
                 },
@@ -242,7 +242,7 @@
                 }
             });
 
-            // Labor Chart
+            // Labor Chart remains the same
             const laborCtx = document.getElementById('laborChart').getContext('2d');
             new Chart(laborCtx, {
                 type: 'pie',
