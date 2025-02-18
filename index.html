@@ -6,82 +6,350 @@
     <title>PIC Financial Dashboard - 2025 YTD</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+<script src="/auth.js"></script>
 </head>
 <body class="bg-gray-100">
-    <!-- Login Screen -->
-    <div id="loginScreen" class="fixed inset-0 bg-gray-100 flex items-center justify-center z-50">
-        <div class="bg-white p-8 rounded-lg shadow-lg max-w-md w-full">
-            <h2 class="text-2xl font-bold mb-4">PIC Financial Dashboard Login</h2>
-            <input 
-                type="password" 
-                id="passwordInput" 
-                class="w-full p-2 border rounded mb-4" 
-                placeholder="Enter password"
-            >
-            <button 
-                onclick="checkPassword()" 
-                class="w-full bg-orange-600 text-white py-2 px-4 rounded hover:bg-orange-700"
-            >
-                Login
-            </button>
-            <p id="errorMessage" class="text-red-600 mt-2 hidden">Incorrect password</p>
+    <div class="bg-white p-8">
+        <div class="max-w-7xl mx-auto">
+            <h1 class="text-3xl font-bold text-gray-800 mb-8">PIC Financial Dashboard - 2025 YTD</h1>
+
+            <!-- Key Metrics -->
+            <div class="grid grid-cols-1 md:grid-cols-8 gap-4 mb-8">
+                <!-- Revenue -->
+                <div class="bg-white p-4 rounded-lg shadow border-l-4 border-orange-900">
+                    <h3 class="font-semibold text-gray-800">YTD Revenue</h3>
+                    <p class="text-2xl text-gray-800">$151,423</p>
+                    <p class="text-sm text-gray-600">87.81% of budget</p>
+                </div>
+                <div class="bg-white p-4 rounded-lg shadow border-l-4 border-orange-900">
+                    <h3 class="font-semibold text-gray-800">YoY Revenue Performance</h3>
+                    <p class="text-2xl text-gray-800">+5.11%</p>
+                    <p class="text-sm text-green-600">+$5,058 vs 2024</p>
+                </div>
+
+                <!-- EBITDA -->
+                <div class="bg-white p-4 rounded-lg shadow border-l-4 border-blue-500">
+                    <h3 class="font-semibold text-gray-800">YTD EBITDA</h3>
+                    <p class="text-2xl text-gray-800">-$42,480</p>
+                    <p class="text-sm text-gray-600">Operating Performance</p>
+                </div>
+                <div class="bg-white p-4 rounded-lg shadow border-l-4 border-blue-500">
+                    <h3 class="font-semibold text-gray-800">YoY EBITDA Performance</h3>
+                    <p class="text-2xl text-gray-800">+57.33%</p>
+                    <p class="text-sm text-green-600">+$57,074 vs 2024</p>
+                </div>
+
+                <!-- Expenses -->
+                <div class="bg-white p-4 rounded-lg shadow border-l-4 border-red-300">
+                    <h3 class="font-semibold text-gray-800">YTD Expenses</h3>
+                    <p class="text-2xl text-gray-800">$207,700</p>
+                    <p class="text-sm text-gray-600">96.34% of budget</p>
+                </div>
+                <div class="bg-white p-4 rounded-lg shadow border-l-4 border-red-300">
+                    <h3 class="font-semibold text-gray-800">YoY Expense Performance</h3>
+                    <p class="text-2xl text-gray-800">-18.49%</p>
+                    <p class="text-sm text-green-600">$47,114 reduction</p>
+                </div>
+
+                <!-- Net Income -->
+                <div class="bg-white p-4 rounded-lg shadow border-l-4 border-gray-800">
+                    <h3 class="font-semibold text-gray-800">YTD Net Income</h3>
+                    <p class="text-2xl text-gray-800">-$55,952</p>
+                    <p class="text-sm text-gray-600">vs budget -$43,149</p>
+                </div>
+                <div class="bg-white p-4 rounded-lg shadow border-l-4 border-gray-800">
+                    <h3 class="font-semibold text-gray-800">YoY Net Income Performance</h3>
+                    <p class="text-2xl text-gray-800">+49.48%</p>
+                    <p class="text-sm text-green-600">+$54,797 vs 2024</p>
+                </div>
+            </div>
+
+            <!-- Monthly Reports Section -->
+            <div class="mb-8">
+                <h2 class="text-2xl font-bold text-orange-900 mb-4">Monthly Reports</h2>
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                    <!-- January -->
+                    <a href="./2025/january.html" class="block">
+                        <div class="bg-orange-50 p-4 rounded-lg border-2 border-orange-500 hover:bg-orange-100 transition-colors">
+                            <h3 class="font-semibold text-lg mb-2">January 2025</h3>
+                            <ul class="text-sm space-y-1">
+                                <li>Revenue: $151,423</li>
+                                <li>EBITDA: -$42,480</li>
+                                <li>Net Income: -$55,952</li>
+                                <li>YoY Growth: +5.11%</li>
+                            </ul>
+                        </div>
+                    </a>
+
+                    <!-- Future Months (Disabled) -->
+                    <div class="bg-gray-50 p-4 rounded-lg opacity-50">
+                        <h3 class="font-semibold text-lg mb-2">February 2025</h3>
+                        <p class="text-sm">Coming soon</p>
+                    </div>
+                    <div class="bg-gray-50 p-4 rounded-lg opacity-50">
+                        <h3 class="font-semibold text-lg mb-2">March 2025</h3>
+                        <p class="text-sm">Coming soon</p>
+                    </div>
+                    <div class="bg-gray-50 p-4 rounded-lg opacity-50">
+                        <h3 class="font-semibold text-lg mb-2">April 2025</h3>
+                        <p class="text-sm">Coming soon</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- YTD Performance Chart -->
+            <div class="mb-8">
+                <h2 class="text-2xl font-bold text-orange-900 mb-4">YTD Performance</h2>
+                <div class="bg-white p-6 rounded-lg shadow">
+                    <div class="h-96">
+                        <canvas id="ytdChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Expense Categories -->
+            <div class="mb-8">
+                <h2 class="text-2xl font-bold text-gray-800 mb-4">Expense Categories</h2>
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                    <div class="bg-white p-4 rounded-lg shadow">
+                        <h3 class="font-semibold text-lg mb-2">Labor Costs</h3>
+                        <p class="text-xl mb-1">$165,288</p>
+                        <p class="text-sm text-gray-600 mb-2">79.6% of total expenses</p>
+                        <ul class="text-sm space-y-1">
+                            <li>Payroll: $102,679</li>
+                            <li>Veem: $50,235</li>
+                            <li>Upwork: $4,819</li>
+                            <li>Commissions: $7,554</li>
+                        </ul>
+                    </div>
+                    <div class="bg-white p-4 rounded-lg shadow">
+                        <h3 class="font-semibold text-lg mb-2">Technology</h3>
+                        <p class="text-xl mb-1">$20,267</p>
+                        <p class="text-sm text-gray-600 mb-2">9.8% of total expenses</p>
+                        <ul class="text-sm space-y-1">
+                            <li>Software: $16,218</li>
+                            <li>Internet/Phone: $4,049</li>
+                        </ul>
+                    </div>
+                    <div class="bg-white p-4 rounded-lg shadow">
+                        <h3 class="font-semibold text-lg mb-2">Professional Services</h3>
+                        <p class="text-xl mb-1">$3,633</p>
+                        <p class="text-sm text-gray-600 mb-2">1.7% of total expenses</p>
+                        <ul class="text-sm space-y-1">
+                            <li>Legal: $283</li>
+                            <li>IT Services: $3,350</li>
+                            <li>Accounting: $0</li>
+                        </ul>
+                    </div>
+                    <div class="bg-white p-4 rounded-lg shadow">
+                        <h3 class="font-semibold text-lg mb-2">Financial</h3>
+                        <p class="text-xl mb-1">$9,260</p>
+                        <p class="text-sm text-gray-600 mb-2">4.5% of total expenses</p>
+                        <ul class="text-sm space-y-1">
+                            <li>Interest: $4,103</li>
+                            <li>QB Fees: $4,874</li>
+                            <li>Bank Fees: $43</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Expense Categories YoY Charts -->
+            <div class="mb-8">
+                <h2 class="text-2xl font-bold text-gray-800 mb-4">Expense Categories Year over Year</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="bg-white p-6 rounded-lg shadow">
+                        <h3 class="text-xl font-bold mb-4">Labor Costs YoY</h3>
+                        <div class="h-64">
+                            <canvas id="laborChart"></canvas>
+                        </div>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow">
+                        <h3 class="text-xl font-bold mb-4">Technology YoY</h3>
+                        <div class="h-64">
+                            <canvas id="technologyChart"></canvas>
+                        </div>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow">
+                        <h3 class="text-xl font-bold mb-4">Professional Services YoY</h3>
+                        <div class="h-64">
+                            <canvas id="professionalChart"></canvas>
+                        </div>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow">
+                        <h3 class="text-xl font-bold mb-4">Financial YoY</h3>
+                        <div class="h-64">
+                            <canvas id="financialChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Critical Focus Areas -->
+            <div class="bg-orange-50 p-4 rounded-lg">
+                <h2 class="text-2xl font-bold text-orange-900 mb-4">Critical Focus Areas</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <h3 class="font-semibold mb-2">Financial Priorities</h3>
+                        <ul class="list-disc pl-5 space-y-2">
+                            <li>Revenue gap of $21,022 below budget</li>
+                            <li>EBITDA improved significantly but remains negative</li>
+                            <li>QB Loan interest exceeding budget (157.81%)</li>
+                            <li>Payment processing fees at 194.95% of budget</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold mb-2">Operational Improvements</h3>
+                        <ul class="list-disc pl-5 space-y-2">
+                            <li>18.49% reduction in total expenses YoY</li>
+                            <li>Optimization of contractor allocation needed</li>
+                            <li>Healthcare costs up 29.73% YoY</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
-    <!-- Dashboard Content -->
-    <div id="dashboardContent" class="hidden">
-        <!-- Logout Button -->
-        <div class="fixed top-4 right-4 z-40">
-            <button onclick="logout()" class="px-4 py-2 bg-orange-600 text-white rounded hover:bg-orange-700">
-                Logout
-            </button>
-        </div>
-
-        <!-- Your Existing Dashboard Content -->
-        <div class="bg-white p-8">
-            <!-- Rest of your existing code goes here, unchanged -->
-            [Your existing dashboard HTML content goes here, starting with the max-w-7xl div]
-        </div>
-    </div>
-
-    <!-- Authentication Script -->
     <script>
-        // Check if already authenticated
-        if (sessionStorage.getItem('authenticated') === 'true') {
-            showDashboard();
-        }
-
-        function checkPassword() {
-            const password = document.getElementById('passwordInput').value;
-            if (password === 'picops') {
-                sessionStorage.setItem('authenticated', 'true');
-                showDashboard();
-            } else {
-                document.getElementById('errorMessage').classList.remove('hidden');
-                document.getElementById('passwordInput').value = '';
+        // Wait for DOM and Chart.js to load
+        window.addEventListener('load', function() {
+            if (typeof Chart === 'undefined') {
+                console.error('Chart.js not loaded');
+                return;
             }
-        }
 
-        function showDashboard() {
-            document.getElementById('loginScreen').classList.add('hidden');
-            document.getElementById('dashboardContent').classList.remove('hidden');
-        }
+            try {
+                // Utility function for currency formatting
+                function formatCurrency(value) {
+                    return new Intl.NumberFormat('en-US', {
+                        style: 'currency',
+                        currency: 'USD',
+                        minimumFractionDigits: 0,
+                        maximumFractionDigits: 0,
+                    }).format(value);
+                }
 
-        function logout() {
-            sessionStorage.removeItem('authenticated');
-            document.getElementById('loginScreen').classList.remove('hidden');
-            document.getElementById('dashboardContent').classList.add('hidden');
-        }
+                // YTD Performance Chart
+                const ytdCtx = document.getElementById('ytdChart');
+                if (ytdCtx) {
+                    new Chart(ytdCtx, {
+                        type: 'bar',
+                        data: {
+                            labels: ['Revenue', 'EBITDA', 'Net Income'],
+                            datasets: [{
+                                label: 'Actual',
+                                data: [151423, -42480, -55952],
+                                backgroundColor: '#8B4513'
+                            }, {
+                                label: 'Budget',
+                                data: [172445, -33149, -43149],
+                                backgroundColor: '#FF6B6B'
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            plugins: {
+                                tooltip: {
+                                    callbacks: {
+                                        label: function(context) {
+                                            return context.dataset.label + ': ' + formatCurrency(context.raw);
+                                        }
+                                    }
+                                }
+                            },
+                            scales: {
+                                y: {
+                                    beginAtZero: true,
+                                    ticks: {
+                                        callback: function(value) {
+                                            return formatCurrency(value);
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    });
+                }
 
-        // Add enter key support for password input
-        document.getElementById('passwordInput').addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
-                checkPassword();
+                // Category data definition
+                const categories = [
+                    {
+                        id: 'laborChart',
+                        title: 'Labor Costs',
+                        data2025: 165288,
+                        data2024: 214072
+                    },
+                    {
+                        id: 'technologyChart',
+                        title: 'Technology',
+                        data2025: 20267,
+                        data2024: 21654
+                    },
+                    {
+                        id: 'professionalChart',
+                        title: 'Professional Services',
+                        data2025: 3633,
+                        data2024: 3752
+                    },
+                    {
+                        id: 'financialChart',
+                        title: 'Financial',
+                        data2025: 9260,
+                        data2024: 5560
+                    }
+                ];
+
+                // Create Category Charts
+                categories.forEach(category => {
+                    const ctx = document.getElementById(category.id);
+                    if (ctx) {
+                        new Chart(ctx, {
+                            type: 'bar',
+                            data: {
+                                labels: [category.title],
+                                datasets: [{
+                                    label: '2025',
+                                    data: [category.data2025],
+                                    backgroundColor: '#8B4513'
+                                }, {
+                                    label: '2024',
+                                    data: [category.data2024],
+                                    backgroundColor: '#FF6B6B'
+                                }]
+                            },
+                            options: {
+                                responsive: true,
+                                maintainAspectRatio: false,
+                                scales: {
+                                    y: {
+                                        beginAtZero: true,
+                                        ticks: {
+                                            callback: function(value) {
+                                                return formatCurrency(value);
+                                            }
+                                        }
+                                    }
+                                },
+                                plugins: {
+                                    tooltip: {
+                                        callbacks: {
+                                            label: function(context) {
+                                                return context.dataset.label + ': ' + formatCurrency(context.raw);
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        });
+                    }
+                });
+            } catch (error) {
+                console.error('Error initializing charts:', error);
             }
         });
     </script>
-
-    <!-- Your existing chart initialization script (unchanged) -->
-    [Your existing chart initialization script goes here]
 </body>
 </html>
+                                
