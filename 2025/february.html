@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>February 2025 | PIC Financial Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        .slide {
+            display: none;
+        }
+        .slide.active {
+            display: block;
+        }
+        .chart-container {
+            height: 400px;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body class="bg-orange-100 p-8">
+    <!-- Login Screen -->
+<div id="loginScreen" class="fixed inset-0 bg-gray-100 flex items-center justify-center z-50">
+    <div class="bg-white p-8 rounded-lg shadow-lg max-w-md w-full">
+        <h2 class="text-2xl font-bold mb-4">PIC Financial Dashboard Login</h2>
+        <input
+            type="password"
+            id="passwordInput"
+            class="w-full p-2 border rounded mb-4"
+            placeholder="Enter password"
+        >
+        <button
+            onclick="checkPassword()"
+            class="w-full bg-orange-600 text-white py-2 px-4 rounded hover:bg-orange-700"
+        >
+            Login
+        </button>
+        <p id="errorMessage" class="text-red-600 mt-2 hidden">Incorrect password</p>
+    </div>
+</div>
+    <div id="dashboardContent" class="hidden">
+    <!-- Add logout button here -->
+    <div class="fixed top-4 right-4 z-40">
+        <button onclick="logout()" class="px-4 py-2 bg-orange-600 text-white rounded hover:bg-orange-700">
+            Logout
+        </button>
+    </div>
+         <!-- Dashboard Code Begins -->
+    <div class="max-w-7xl mx-auto">
+        <div class="bg-white rounded-lg shadow-lg p-6 mb-4">
+            <!-- YTD Dashboard Link -->
+            <div class="mb-4">
+                <a href="/financial-dashboard/index.html" class="text-orange-700 hover:text-orange-900 font-medium">
+                    ← Back to YTD Dashboard
+                </a>
+            </div>
+
+            <!-- Slide Navigation -->
+            <div class="flex justify-between items-center mb-6">
+                <div class="text-sm text-orange-700">
+                    Slide <span id="currentSlide">1</span> of 2
+                </div>
+                <div>
+                    <button onclick="previousSlide()" class="px-4 py-2 bg-orange-100 rounded-lg mr-2 hover:bg-orange-200">Previous</button>
+                    <button onclick="nextSlide()" class="px-4 py-2 bg-orange-100 rounded-lg hover:bg-orange-200">Next</button>
+                </div>
+            </div>
+
+            <!-- Slide 1 -->
+            <div id="slide1" class="slide active">
+                <h1 class="text-3xl font-bold text-orange-900 mb-6">February 2025 Financial Overview</h1>
+
+                <!-- Key Metrics -->
+                <div class="grid grid-cols-1 md:grid-cols-5 gap-4 mb-6">
+                    <div class="bg-orange-100 p-4 rounded-lg">
+                        <h3 class="font-semibold">Revenue</h3>
+                        <p class="text-lg">$227,119</p>
+                        <p class="text-sm text-orange-700">77.00% of budget</p>
+                    </div>
+                    <div class="bg-orange-100 p-4 rounded-lg">
+                        <h3 class="font-semibold">EBITDA</h3>
+                        <p class="text-lg">$38,737</p>
+                        <p class="text-sm text-orange-700">Operating Performance</p>
+                    </div>
+                    <div class="bg-orange-100 p-4 rounded-lg">
+                        <h3 class="font-semibold">EBITDA YoY</h3>
+                        <p class="text-lg">+586.83%</p>
+                        <p class="text-sm text-green-600">+$43,079 vs 2024</p>
+                    </div>
+                    <div class="bg-orange-100 p-4 rounded-lg">
+                        <h3 class="font-semibold">Net Income</h3>
+                        <p class="text-lg">$35,819</p>
+                        <p class="text-sm text-orange-700">vs budget $90,997</p>
+                    </div>
+                    <div class="bg-orange-100 p-4 rounded-lg">
+                        <h3 class="font-semibold">YoY Improvement</h3>
+                        <p class="text-lg">+583.37%</p>
+                        <p class="text-sm text-orange-700">vs Feb 2024</p>
+                    </div>
+                </div>
+
+                <!-- YoY Performance Chart -->
+                <div class="chart-container mb-8">
+                    <canvas id="yoyPerformanceChart"></canvas>
+                </div>
+
+                <!-- Performance Chart -->
+                <div class="chart-container">
+                    <canvas id="currentPerformanceChart"></canvas>
+                </div>
+
+                <!-- Critical Issues -->
+                <div class="bg-orange-50 p-4 rounded-lg">
+                    <h3 class="text-xl font-semibold text-orange-900 mb-2">Critical Issues</h3>
+                    <ul class="list-disc pl-5 space-y-2">
+                        <li>Consulting revenue at 74.04% of budget (-$68,160)</li>
+                        <li>Bank fees significantly over budget (2,527%)</li>
+                        <li>Net income at 39.36% of budget (-$55,178)</li>
+                        <li>PIC Commissions exceeding budget (+$675)</li>
+                        <li>Healthcare costs reduced by 38.65% YoY</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Slide 2 -->
+            <div id="slide2" class="slide">
+                <h1 class="text-3xl font-bold text-orange-900 mb-6">Expense Analysis & Action Items</h1>
+
+                <!-- Expense Chart -->
+                <div class="chart-container">
+                    <canvas id="expenseChart"></canvas>
+                </div>
+
+                <!-- Labor Breakdown -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="bg-orange-50 p-4 rounded-lg">
+                        <h3 class="text-xl font-semibold text-orange-900 mb-2">February Expense Highlights</h3>
+                        <ul class="list-disc pl-5 space-y-2">
+                            <li>Advertising: 72.75% of budget (-$763)</li>
+                            <li>IT Services: 101.10% of budget (+$37)</li>
+                            <li>Accounting: 452.76% of budget (+$2,240)</li>
+                            <li>QB Payment Fees: 141.35% of budget (+$1,034)</li>
+                            <li>Total expenses: 93.84% of budget (-$12,565)</li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-orange-50 p-4 rounded-lg">
+                        <h3 class="text-xl font-semibold text-orange-900 mb-2">Action Items</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <h4 class="font-semibold">Revenue</h4>
+                                <ul class="list-disc pl-5">
+                                    <li>Address consulting pipeline</li>
+                                    <li>Investigate commission success</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold">Operational</h4>
+                                <ul class="list-disc pl-5">
+                                    <li>Review bank fee structures</li>
+                                    <li>Evaluate accounting costs</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    <!-- Authentication Script -->
+<script>
+    // Check if already authenticated
+    if (sessionStorage.getItem('authenticated') === 'true') {
+        showDashboard();
+    }
+
+    function checkPassword() {
+        const password = document.getElementById('passwordInput').value;
+        if (password === 'picops') {
+            sessionStorage.setItem('authenticated', 'true');
+            showDashboard();
+        } else {
+            document.getElementById('errorMessage').classList.remove('hidden');
+            document.getElementById('passwordInput').value = '';
+        }
+    }
+
+    function showDashboard() {
+        document.getElementById('loginScreen').classList.add('hidden');
+        document.getElementById('dashboardContent').classList.remove('hidden');
+    }
+
+    function logout() {
+        sessionStorage.removeItem('authenticated');
+        document.getElementById('loginScreen').classList.remove('hidden');
+        document.getElementById('dashboardContent').classList.add('hidden');
+    }
+
+    // Add enter key support for password input
+    document.getElementById('passwordInput').addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+            checkPassword();
+        }
+    });
+</script>
+    <script>
+        // Slide Navigation logic
+        let currentSlideIndex = 1;
+
+        function showSlide(n) {
+            const slides = document.querySelectorAll('.slide');
+            const currentSlideDisplay = document.getElementById('currentSlide');
+
+            slides.forEach(slide => slide.classList.remove('active'));
+            currentSlideIndex = n;
+            slides[n-1].classList.add('active');
+            currentSlideDisplay.textContent = n;
+        }
+
+        function nextSlide() {
+            if (currentSlideIndex < 2) showSlide(currentSlideIndex + 1);
+        }
+
+        function previousSlide() {
+            if (currentSlideIndex > 1) showSlide(currentSlideIndex - 1);
+        }
+
+        // Initialize Charts
+        document.addEventListener('DOMContentLoaded', function() {
+            // YoY Performance Chart
+            const yoyCtx = document.getElementById('yoyPerformanceChart').getContext('2d');
+            new Chart(yoyCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['Revenue', 'EBITDA', 'Net Income'],
+                    datasets: [{
+                        label: '2025',
+                        data: [227119, 38737, 35819],
+                        backgroundColor: '#8B4513'
+                    }, {
+                        label: '2024',
+                        data: [178240, -7341, -7410],
+                        backgroundColor: '#FF6B6B'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'Year over Year Comparison'
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                callback: function(value) {
+                                    return '$' + value.toLocaleString();
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Current Performance Chart
+            const perfCtx = document.getElementById('currentPerformanceChart').getContext('2d');
+            new Chart(perfCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['Revenue', 'Net Income'],
+                    datasets: [{
+                        label: 'Actual',
+                        data: [227119, 35819],
+                        backgroundColor: '#8B4513'
+                    }, {
+                        label: 'Budget',
+                        data: [294944, 90997],
+                        backgroundColor: '#FF6B6B'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'Current Month vs Budget'
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                callback: function(value) {
+                                    return '$' + value.toLocaleString();
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Expense Chart
+            const expenseCtx = document.getElementById('expenseChart').getContext('2d');
+            new Chart(expenseCtx, {
+                type: 'pie',
+                data: {
+                    labels: ['Payroll', 'Veem', 'Upwork', 'Professional Services', 'Software', 'Other'],
+                    datasets: [{
+                        data: [101936, 44742, 4713, 6275, 8807, 24908],
+                        backgroundColor: ['#8B4513', '#FF6B6B', '#FFA07A', '#FFD700', '#20B2AA', '#B0C4DE']
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'February Expense Distribution'
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    let label = context.label || '';
+                                    if (label) {
+                                        label += ': ';
+                                    }
+                                    label += '$' + context.raw.toLocaleString();
+                                    return label;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
