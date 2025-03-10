@@ -6,9 +6,34 @@
     <title>PIC Financial Dashboard - 2025 YTD</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-<script src="/auth.js"></script>
 </head>
 <body class="bg-gray-100">
+    <!-- Login Screen -->
+<div id="loginScreen" class="fixed inset-0 bg-gray-100 flex items-center justify-center z-50">
+    <div class="bg-white p-8 rounded-lg shadow-lg max-w-md w-full">
+        <h2 class="text-2xl font-bold mb-4">PIC Financial Dashboard Login</h2>
+        <input
+            type="password"
+            id="passwordInput"
+            class="w-full p-2 border rounded mb-4"
+            placeholder="Enter password"
+        >
+        <button
+            onclick="checkPassword()"
+            class="w-full bg-orange-600 text-white py-2 px-4 rounded hover:bg-orange-700"
+        >
+            Login
+        </button>
+        <p id="errorMessage" class="text-red-600 mt-2 hidden">Incorrect password</p>
+    </div>
+</div>
+    <div id="dashboardContent" class="hidden">
+         <!-- Logout Button -->
+<div class="fixed top-4 right-4 z-40">
+    <button onclick="logout()" class="px-4 py-2 bg-orange-600 text-white rounded hover:bg-orange-700">
+        Logout
+    </button>
+</div>
     <div class="bg-white p-8">
         <div class="max-w-7xl mx-auto">
             <h1 class="text-3xl font-bold text-gray-800 mb-8">PIC Financial Dashboard - 2025 YTD</h1>
@@ -18,49 +43,49 @@
                 <!-- Revenue -->
                 <div class="bg-white p-4 rounded-lg shadow border-l-4 border-orange-900">
                     <h3 class="font-semibold text-gray-800">YTD Revenue</h3>
-                    <p class="text-2xl text-gray-800">$151,423</p>
-                    <p class="text-sm text-gray-600">87.81% of budget</p>
+                    <p class="text-2xl text-gray-800">$378,542</p>
+                    <p class="text-sm text-gray-600">80.99% of budget</p>
                 </div>
                 <div class="bg-white p-4 rounded-lg shadow border-l-4 border-orange-900">
                     <h3 class="font-semibold text-gray-800">YoY Revenue Performance</h3>
-                    <p class="text-2xl text-gray-800">+5.11%</p>
-                    <p class="text-sm text-green-600">+$5,058 vs 2024</p>
+                    <p class="text-2xl text-gray-800">+17.45%</p>
+                    <p class="text-sm text-green-600">+$56,237 vs 2024</p>
                 </div>
 
                 <!-- EBITDA -->
                 <div class="bg-white p-4 rounded-lg shadow border-l-4 border-blue-500">
                     <h3 class="font-semibold text-gray-800">YTD EBITDA</h3>
-                    <p class="text-2xl text-gray-800">-$42,480</p>
+                    <p class="text-2xl text-gray-800">-$13,743</p>
                     <p class="text-sm text-gray-600">Operating Performance</p>
                 </div>
                 <div class="bg-white p-4 rounded-lg shadow border-l-4 border-blue-500">
                     <h3 class="font-semibold text-gray-800">YoY EBITDA Performance</h3>
-                    <p class="text-2xl text-gray-800">+57.33%</p>
-                    <p class="text-sm text-green-600">+$57,074 vs 2024</p>
+                    <p class="text-2xl text-gray-800">+88.39%</p>
+                    <p class="text-sm text-green-600">+$104,531 vs 2024</p>
                 </div>
 
                 <!-- Expenses -->
                 <div class="bg-white p-4 rounded-lg shadow border-l-4 border-red-300">
                     <h3 class="font-semibold text-gray-800">YTD Expenses</h3>
-                    <p class="text-2xl text-gray-800">$207,700</p>
-                    <p class="text-sm text-gray-600">96.34% of budget</p>
+                    <p class="text-2xl text-gray-800">$397,737</p>
+                    <p class="text-sm text-gray-600">94.80% of budget</p>
                 </div>
                 <div class="bg-white p-4 rounded-lg shadow border-l-4 border-red-300">
                     <h3 class="font-semibold text-gray-800">YoY Expense Performance</h3>
-                    <p class="text-2xl text-gray-800">-18.49%</p>
-                    <p class="text-sm text-green-600">$47,114 reduction</p>
+                    <p class="text-2xl text-gray-800">-9.69%</p>
+                    <p class="text-sm text-green-600">$42,659 reduction</p>
                 </div>
 
                 <!-- Net Income -->
                 <div class="bg-white p-4 rounded-lg shadow border-l-4 border-gray-800">
                     <h3 class="font-semibold text-gray-800">YTD Net Income</h3>
-                    <p class="text-2xl text-gray-800">-$55,952</p>
-                    <p class="text-sm text-gray-600">vs budget -$43,149</p>
+                    <p class="text-2xl text-gray-800">-$19,017</p>
+                    <p class="text-sm text-gray-600">vs budget $47,848</p>
                 </div>
                 <div class="bg-white p-4 rounded-lg shadow border-l-4 border-gray-800">
                     <h3 class="font-semibold text-gray-800">YoY Net Income Performance</h3>
-                    <p class="text-2xl text-gray-800">+49.48%</p>
-                    <p class="text-sm text-green-600">+$54,797 vs 2024</p>
+                    <p class="text-2xl text-gray-800">+83.91%</p>
+                    <p class="text-sm text-green-600">+$99,142 vs 2024</p>
                 </div>
             </div>
 
@@ -81,11 +106,20 @@
                         </div>
                     </a>
 
+                    <!-- February -->
+                    <a href="./2025/february.html" class="block">
+                        <div class="bg-orange-50 p-4 rounded-lg border-2 border-orange-500 hover:bg-orange-100 transition-colors">
+                            <h3 class="font-semibold text-lg mb-2">February 2025</h3>
+                            <ul class="text-sm space-y-1">
+                                <li>Revenue: $227,119</li>
+                                <li>EBITDA: $38,737</li>
+                                <li>Net Income: $35,819</li>
+                                <li>YoY Growth: +27.42%</li>
+                            </ul>
+                        </div>
+                    </a>
+
                     <!-- Future Months (Disabled) -->
-                    <div class="bg-gray-50 p-4 rounded-lg opacity-50">
-                        <h3 class="font-semibold text-lg mb-2">February 2025</h3>
-                        <p class="text-sm">Coming soon</p>
-                    </div>
                     <div class="bg-gray-50 p-4 rounded-lg opacity-50">
                         <h3 class="font-semibold text-lg mb-2">March 2025</h3>
                         <p class="text-sm">Coming soon</p>
@@ -113,42 +147,43 @@
                 <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
                     <div class="bg-white p-4 rounded-lg shadow">
                         <h3 class="font-semibold text-lg mb-2">Labor Costs</h3>
-                        <p class="text-xl mb-1">$165,288</p>
-                        <p class="text-sm text-gray-600 mb-2">79.6% of total expenses</p>
+                        <p class="text-xl mb-1">$321,815</p>
+                        <p class="text-sm text-gray-600 mb-2">80.9% of total expenses</p>
                         <ul class="text-sm space-y-1">
-                            <li>Payroll: $102,679</li>
-                            <li>Veem: $50,235</li>
-                            <li>Upwork: $4,819</li>
-                            <li>Commissions: $7,554</li>
+                            <li>Payroll: $204,615</li>
+                            <li>Veem: $94,977</li>
+                            <li>Upwork: $9,533</li>
+                            <li>Commissions: $7,991</li>
+                            <li>PIC South+: $5,699</li>
                         </ul>
                     </div>
                     <div class="bg-white p-4 rounded-lg shadow">
                         <h3 class="font-semibold text-lg mb-2">Technology</h3>
-                        <p class="text-xl mb-1">$20,267</p>
-                        <p class="text-sm text-gray-600 mb-2">9.8% of total expenses</p>
+                        <p class="text-xl mb-1">$27,675</p>
+                        <p class="text-sm text-gray-600 mb-2">7.0% of total expenses</p>
                         <ul class="text-sm space-y-1">
-                            <li>Software: $16,218</li>
-                            <li>Internet/Phone: $4,049</li>
+                            <li>Software: $25,026</li>
+                            <li>Internet/Phone: $2,649</li>
                         </ul>
                     </div>
                     <div class="bg-white p-4 rounded-lg shadow">
                         <h3 class="font-semibold text-lg mb-2">Professional Services</h3>
-                        <p class="text-xl mb-1">$3,633</p>
-                        <p class="text-sm text-gray-600 mb-2">1.7% of total expenses</p>
+                        <p class="text-xl mb-1">$9,908</p>
+                        <p class="text-sm text-gray-600 mb-2">2.5% of total expenses</p>
                         <ul class="text-sm space-y-1">
+                            <li>IT Services: $6,750</li>
+                            <li>Accounting: $2,875</li>
                             <li>Legal: $283</li>
-                            <li>IT Services: $3,350</li>
-                            <li>Accounting: $0</li>
                         </ul>
                     </div>
                     <div class="bg-white p-4 rounded-lg shadow">
                         <h3 class="font-semibold text-lg mb-2">Financial</h3>
-                        <p class="text-xl mb-1">$9,260</p>
-                        <p class="text-sm text-gray-600 mb-2">4.5% of total expenses</p>
+                        <p class="text-xl mb-1">$14,957</p>
+                        <p class="text-sm text-gray-600 mb-2">3.8% of total expenses</p>
                         <ul class="text-sm space-y-1">
-                            <li>Interest: $4,103</li>
-                            <li>QB Fees: $4,874</li>
-                            <li>Bank Fees: $43</li>
+                            <li>Interest: $5,274</li>
+                            <li>QB Fees: $8,408</li>
+                            <li>Bank Fees: $1,275</li>
                         </ul>
                     </div>
                 </div>
@@ -192,25 +227,64 @@
                     <div>
                         <h3 class="font-semibold mb-2">Financial Priorities</h3>
                         <ul class="list-disc pl-5 space-y-2">
-                            <li>Revenue gap of $21,022 below budget</li>
-                            <li>EBITDA improved significantly but remains negative</li>
-                            <li>QB Loan interest exceeding budget (157.81%)</li>
-                            <li>Payment processing fees at 194.95% of budget</li>
+                            <li>Revenue gap of $88,847 below budget YTD</li>
+                            <li>February consulting revenue at 74.04% of budget</li>
+                            <li>Strong commissions in February (+$675 over budget)</li>
+                            <li>QB Payment fees at 168.15% of YTD budget</li>
+                            <li>Bank fees significantly over budget (1,307.69%)</li>
                         </ul>
                     </div>
                     <div>
                         <h3 class="font-semibold mb-2">Operational Improvements</h3>
                         <ul class="list-disc pl-5 space-y-2">
-                            <li>18.49% reduction in total expenses YoY</li>
-                            <li>Optimization of contractor allocation needed</li>
-                            <li>Healthcare costs up 29.73% YoY</li>
+                            <li>9.69% reduction in total expenses YoY</li>
+                            <li>February profitability improved by 583.37% YoY</li>
+                            <li>Outside services reduced by 13.95% in February</li>
+                            <li>Software expenses under budget (72.42% of YTD budget)</li>
+                            <li>Healthcare costs down 17.70% YoY for YTD</li>
                         </ul>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    </div>
+    <!-- Authentication Script -->
+<script>
+    // Check if already authenticated
+    if (sessionStorage.getItem('authenticated') === 'true') {
+        showDashboard();
+    }
 
+    function checkPassword() {
+        const password = document.getElementById('passwordInput').value;
+        if (password === 'picops') {
+            sessionStorage.setItem('authenticated', 'true');
+            showDashboard();
+        } else {
+            document.getElementById('errorMessage').classList.remove('hidden');
+            document.getElementById('passwordInput').value = '';
+        }
+    }
+
+    function showDashboard() {
+        document.getElementById('loginScreen').classList.add('hidden');
+        document.getElementById('dashboardContent').classList.remove('hidden');
+    }
+
+    function logout() {
+        sessionStorage.removeItem('authenticated');
+        document.getElementById('loginScreen').classList.remove('hidden');
+        document.getElementById('dashboardContent').classList.add('hidden');
+    }
+
+    // Add enter key support for password input
+    document.getElementById('passwordInput').addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+            checkPassword();
+        }
+    });
+</script>
     <script>
         // Wait for DOM and Chart.js to load
         window.addEventListener('load', function() {
@@ -239,11 +313,11 @@
                             labels: ['Revenue', 'EBITDA', 'Net Income'],
                             datasets: [{
                                 label: 'Actual',
-                                data: [151423, -42480, -55952],
+                                data: [378542, -13743, -19017],
                                 backgroundColor: '#8B4513'
                             }, {
                                 label: 'Budget',
-                                data: [172445, -33149, -43149],
+                                data: [467389, 53048, 47848],
                                 backgroundColor: '#FF6B6B'
                             }]
                         },
@@ -278,26 +352,26 @@
                     {
                         id: 'laborChart',
                         title: 'Labor Costs',
-                        data2025: 165288,
-                        data2024: 214072
+                        data2025: 321815,
+                        data2024: 361505
                     },
                     {
                         id: 'technologyChart',
                         title: 'Technology',
-                        data2025: 20267,
-                        data2024: 21654
+                        data2025: 27675,
+                        data2024: 31520
                     },
                     {
                         id: 'professionalChart',
                         title: 'Professional Services',
-                        data2025: 3633,
-                        data2024: 3752
+                        data2025: 9908,
+                        data2024: 9024
                     },
                     {
                         id: 'financialChart',
                         title: 'Financial',
-                        data2025: 9260,
-                        data2024: 5560
+                        data2025: 14957,
+                        data2024: 9724
                     }
                 ];
 
@@ -352,4 +426,3 @@
     </script>
 </body>
 </html>
-                                
