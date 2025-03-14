@@ -258,4 +258,73 @@ class SEOFibUIController {
     const header = document.createElement('tr');
     header.innerHTML = `
       <th><input type="checkbox" id="select-all"></th>
-      <th>
+      <th>Keyword</th>
+      <th>Search Volume</th>
+      <th>Volatility Score</th>
+      <th>Current Position</th>
+      <th>Best Position</th>
+      <th>Worst Position</th>
+    `;
+    table.appendChild(header);
+    
+    // Add rows for each keyword
+    volatileKeywords.forEach(keyword => {
+      const row = document.createElement('tr');
+      const currentPos = keyword.positions[keyword.positions.length - 1].position;
+      
+      row.innerHTML = `
+        <td><input type="checkbox" class="keyword-select" data-keyword="${keyword.keyword}"></td>
+        <td>${keyword.keyword}</td>
+        <td>${keyword.searchVolume}</td>
+        <td>${keyword.volatilityScore.toFixed(2)}</td>
+        <td>${currentPos}</td>
+        <td>${keyword.minPosition}</td>
+        <td>${keyword.maxPosition}</td>
+      `;
+      table.appendChild(row);
+    });
+    
+    container.appendChild(table);
+    
+    // Add select all functionality
+    document.getElementById('select-all').addEventListener('change', e => {
+      const checkboxes = document.querySelectorAll('.keyword-select');
+      checkboxes.forEach(cb => cb.checked = e.target.checked);
+    });
+  }
+  
+  // Get user selected keywords
+  getSelectedKeywords() {
+    const checkboxes = document.querySelectorAll('.keyword-select:checked');
+    return Array.from(checkboxes).map(cb => cb.dataset.keyword);
+  }
+  
+  // Render Fibonacci chart for a keyword
+  renderFibonacciChart(keyword, container) {
+    const keywordData = this.analyzer.keywords.find(k => k.keyword === keyword);
+    if (!keywordData) return;
+    
+    const fibData = this.analyzer.calculateFibonacciLevels(keyword);
+    const patterns = this.analyzer.identifyFibonacciPatterns(fibData);
+    const reliability = this.analyzer.calculateFibonacciReliability(keyword);
+    const prediction = this.analyzer.predictNextRanking(keyword);
+    
+    // Create chart data
+    const chartData = {
+      positions: keywordData.positions.map(p => ({
+        date: p.date,
+        position: p.position
+      })),
+      fibLevels: fibData.fibLevels,
+      patterns: patterns,
+      prediction: prediction,
+      reliability: reliability
+    };
+    
+    // Use the imported createChartVisualization function
+    createChartVisualization(chartData, container);
+  }
+}
+
+// Export the classes for use
+export { SEOFibonacciAnalyzer, SEOFibUIController };
