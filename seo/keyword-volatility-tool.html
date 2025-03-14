@@ -1,1 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SEO Fibonacci Retracement Analyzer</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>SEO Fibonacci Retracement Analyzer</h1>
+            <p>Upload your SEMrush ranking data to discover hidden Fibonacci patterns in your keyword rankings</p>
+        </header>
 
+        <section id="file-upload">
+            <h2>Step 1: Upload SEMrush CSV</h2>
+            <p>Export your historical ranking data from SEMrush (Position Tracking > Organic Positions) and upload the CSV file below:</p>
+            <div class="upload-container">
+                <input type="file" id="csv-file" accept=".csv">
+                <button id="upload-btn">Process Data</button>
+            </div>
+            <div id="upload-status"></div>
+        </section>
+
+        <section id="keyword-selection" style="display: none;">
+            <h2>Step 2: Select Keywords</h2>
+            <p>The analyzer has identified the following keywords with significant volatility. Select the ones you'd like to analyze:</p>
+            <div id="keyword-list-container"></div>
+            <button id="analyze-btn">Analyze Selected Keywords</button>
+        </section>
+
+        <section id="results" style="display: none;">
+            <h2>Fibonacci Analysis Results</h2>
+            <div id="charts-container"></div>
+            <div id="summary-container"></div>
+        </section>
+    </div>
+
+    <!-- Load external libraries -->
+    <script src="lib/papaparse.min.js"></script>
+    <script src="lib/lodash.min.js"></script>
+    <script src="lib/chart.min.js"></script>
+    
+    <!-- Load our application code -->
+    <script type="module" src="js/main.js"></script>
+</body>
+</html>
