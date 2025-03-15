@@ -1,5 +1,6 @@
 // Import our analyzer classes
 import { SEOFibonacciAnalyzer, SEOFibUIController } from './analyzer.js';
+import { transformSEMrushData } from './semrush-adapter.js';
 
 // DOM elements
 const csvFileInput = document.getElementById('csv-file');
@@ -29,13 +30,23 @@ async function handleFileUpload() {
     }
 
     try {
-        showStatus('Processing file...', 'info');
+        showStatus('<div class="loading-spinner"></div> Processing file... This might take a minute for large datasets.', 'info');
         
         // Read the file
         const fileContent = await readFile(file);
         
-        // Parse the CSV and process data
-        await analyzer.parseCSV(fileContent);
+        // Parse the CSV file
+        const parsedResult = Papa.parse(fileContent, {
+            header: true,
+            dynamicTyping: true,
+            skipEmptyLines: true
+        });
+        
+        // Transform the complex SEMrush format to the format expected by the analyzer
+        const transformedData = transformSEMrushData(parsedResult.data);
+        
+        // Process the transformed data
+        analyzer.processRawData(transformedData);
         
         // Calculate volatility to identify keywords for analysis
         analyzer.calculateVolatility();
@@ -158,7 +169,7 @@ function analyzeSelectedKeywords() {
 
 // Show status message
 function showStatus(message, type) {
-    uploadStatus.textContent = message;
+    uploadStatus.innerHTML = message;
     uploadStatus.className = '';
     
     if (type === 'error') {
